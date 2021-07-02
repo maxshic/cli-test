@@ -1,8 +1,9 @@
 {
-  "name": "cli-test",
+  "name": "aohua-cli",
   "version": "0.0.1",
   "main": "index.js",
   "license": "MIT",
+  "author": "maxshi",
   "scripts": {
     "start": "echo \"Hello World!\"  && exit 1"
   },
