@@ -4,21 +4,18 @@ const { Command } = require('commander');
 const program = new Command();
 const chalk = require('chalk');
 
+program
+  .passThroughOptions(true)
 
 program
-  .version(require('../package.json').version, '-v, --version');
-
-program
-  .command('init <source>', 'init a project' ,{ executableFile: 'init' })
-  .action(() => {
-    // console.log(
-    //   chalk.green('Init project...')
-    // )
-    console.log(123);
-  })
-
-program
-  .option('-c, --config <path>', 'set config path')
+  .name('aohua')
+  .version(require('../package.json').version, '-v, --version')
+  .description(
+    chalk.green(
+      `Welcom to aohua-cli!`
+    )
+  )
+  .option('-l, --list', 'list avaliable project template')
   .action(() => {
     console.log(
       chalk.green('Config...')
@@ -26,9 +23,24 @@ program
   });
 
 
+program
+  .command('init', 'init a project' ,{ executableFile: 'init' })
+  .action(() => {
+    console.log(
+      chalk.green('Init project...')
+    )
+  })
 
-program.parse();
+program
+  .command('upgrade', 'upgrade cli', { executableFile: 'upgrade' })
+  .action(options => {
+    console.log(
+      chalk.green(1234)
+    )
+  })
+
+program.parse(process.argv);
 
 const options = program.opts(process.argv);
 console.log('options', options);
-// console.log('all', program.args);
+console.log('all', program.args);
