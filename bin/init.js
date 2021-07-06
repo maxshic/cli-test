@@ -3,6 +3,9 @@
 const inquirer = require('inquirer')
 const chalk = require('chalk')
 const execa = require('execa')
+const fs = require('fs')
+const ejs = require('ejs')
+const path = require('path')
 
 const getUser = async function(){
   let s = ''
@@ -32,6 +35,12 @@ const promptList = [
     name: 'description',
     default: 'Some description',
   },
+  // {
+  //   type: 'list',
+  //   message: 'choose a license',
+  //   name: 'license',
+  //   choices: ['MIT']
+  // },
   {
     type: 'input',
     message: 'Author:',
@@ -40,18 +49,30 @@ const promptList = [
   }
 ]
 
-// console.log(chalk.blue.bgRed.bold(`
-//   Welcom to demo cli!
-//   hahahah
-// `))
-
-// const execa = require('execa')
-// execa('npm', ['view', 'aohua-cli', 'versions']).then(result => {
-//   const res =  result.stdout.replace(/\s|\[|\]|\'/g, '').split(',').sort()
-//   console.log('res', res[0])
-//   console.log('cur', require('../package.json').version)
-// }).catch(err => console.log('err'))
-
-inquirer.prompt(promptList).then(answers => {
-  console.log(answers)
-})
+module.exports = function(name){
+  // const files = fs.readFileSync('index.js')
+  // console.log(files)
+  // inquirer.prompt(promptList).then(answers => {
+  //   console.log(answers)
+  // })
+  fs.access('./'+name, fs.constants.F_OK, err => {
+    if(err){
+      console.log(
+        chalk.green('mkdir')
+      )
+      inquirer.prompt(promptList).then(answers => {
+        console.log(__dirname)
+        console.log(answers)
+        ejs.renderFile(path.resolve(__dirname, 'template', 'package.ejs'), { options: answers } , function(err, str){
+          console.log('err', err)
+          console.log('str', str)
+        })
+      })
+      
+    }else{
+      console.log(
+        chalk.red('directory exists')
+      )
+    }
+  })
+}
