@@ -6,7 +6,11 @@
   "author": "maxshi",
   "homepage": "https://www.npmjs.com/package/aohua-cli",
   "repository": "https://github.com/teng520/cli-test",
-  "keywords": ["cli", "vue", "react"],
+  "keywords": [
+    "cli",
+    "vue",
+    "react"
+  ],
   "scripts": {
     "start": "node ./bin/index.js"
   },

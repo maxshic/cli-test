@@ -4,6 +4,7 @@ const inquirer = require('inquirer')
 const chalk = require('chalk')
 const execa = require('execa')
 const fs = require('fs')
+const fse = require('fs-extra')
 const ejs = require('ejs')
 const path = require('path')
 
@@ -50,22 +51,26 @@ const promptList = [
 ]
 
 module.exports = function(name){
-  // const files = fs.readFileSync('index.js')
-  // console.log(files)
-  // inquirer.prompt(promptList).then(answers => {
-  //   console.log(answers)
-  // })
   fs.access('./'+name, fs.constants.F_OK, err => {
     if(err){
-      console.log(
-        chalk.green('mkdir')
-      )
       inquirer.prompt(promptList).then(answers => {
-        console.log(__dirname)
-        console.log(answers)
         ejs.renderFile(path.resolve(__dirname, 'template', 'package.ejs'), { options: answers } , function(err, str){
-          console.log('err', err)
-          console.log('str', str)
+          fse.outputFile(`./${name}/package.json`, str).then(() => {
+console.log(chalk`
+{green init success}
+
+now you can:
+
+  {yellow ${'cd '+name}}
+
+  {yellow ${'run "npm install"'}}
+`)
+          }).catch(err => {
+            console.log(
+              chalk.red('init fail')
+            )
+            console.log(err)
+          })
         })
       })
       
