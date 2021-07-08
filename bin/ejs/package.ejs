@@ -2,10 +2,29 @@
   "name": "<%= options.name %>",
   "version": "<%= options.version %>",
   "description": "<%= options.description %>",
-  "main": "index.js",
   "license": "MIT",
   "author": "<%= options.author %>",
   "scripts": {
-    "start": "echo \"hello\""
-  }
+    "start": "npx webpack serve --mode=development",
+    "build": "npx webpack --mode=production"
+  },
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.14.7",
+    "@babel/preset-react": "^7.14.5",
+    "babel-loader": "^8.2.2",
+    "clean-webpack-plugin": "^4.0.0-alpha.0",
+    "css-loader": "^5.2.6",
+    "html-webpack-plugin": "^5.3.2",
+    "style-loader": "^3.0.0",
+    "url-loader": "^4.1.1",
+    "webpack": "^5.43.0",
+    "webpack-cli": "^4.7.2",
+    "webpack-dev-server": "^3.11.2",
+    "webpackbar": "^5.0.0-3"
+  },
 }
+ 
