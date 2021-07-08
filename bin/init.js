@@ -54,8 +54,11 @@ module.exports = function(name){
   fs.access('./'+name, fs.constants.F_OK, err => {
     if(err){
       inquirer.prompt(promptList).then(answers => {
-        ejs.renderFile(path.resolve(__dirname, 'template', 'package.ejs'), { options: answers } , function(err, str){
+        ejs.renderFile(path.resolve(__dirname, 'ejs', 'package.ejs'), { options: answers } , function(err, str){
           fse.outputFile(`./${name}/package.json`, str).then(() => {
+            return 'success'
+          }).then(() => {
+            fse.copy(path.resolve(__dirname, 'template'), `./${name}`).then(() => {
 console.log(chalk`
 {green init success}
 
@@ -65,6 +68,12 @@ now you can:
 
   {yellow ${'run "npm install"'}}
 `)
+            }).catch(err => {
+              console.log(
+                chalk.red('init fail')
+              )
+              console.log(err)
+            })
           }).catch(err => {
             console.log(
               chalk.red('init fail')
