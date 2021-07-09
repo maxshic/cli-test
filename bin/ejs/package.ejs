@@ -5,8 +5,8 @@
   "license": "MIT",
   "author": "<%= options.author %>",
   "scripts": {
-    "start": "npx webpack serve --mode=development",
-    "build": "npx webpack --mode=production"
+    "start": "npx webpack serve --mode=development --client-log-level none",
+    "build": "npx webpack --mode=production --progress"
   },
   "dependencies": {
     "react": "^17.0.2",

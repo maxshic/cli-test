@@ -3,7 +3,13 @@
 </p>
 
 
+
 # aohua-cli
+
+<p>
+<a href="https://nodei.co/npm/aohua-cli/"><img src="https://nodei.co/npm/aohua-cli.png?compact=true"></a>
+</p>
+
 [![npm](https://img.shields.io/npm/v/aohua-cli)](https://www.npmjs.com/package/aohua-cli)
 [![Node.js Package](https://github.com/teng520/cli-test/actions/workflows/npm-publish.yml/badge.svg)](https://github.com/teng520/cli-test/actions/workflows/npm-publish.yml)
 [![npm](https://img.shields.io/npm/dt/aohua-cli)](https://www.npmjs.com/package/aohua-cli)
